@@ -21,7 +21,7 @@
   "scripts": {
     "build:browser": "wasm-pack build --target browser --out-name wasm_brotli_browser --release",
     "build:nodejs": "wasm-pack build --target nodejs --out-name wasm_brotli_nodejs --release",
-    "build:no-modules": "wasm-pack build --target no-modules --out-name wasm_brotli_no-modules --release",    
+    "build:no-modules": "wasm-pack build --target no-modules --out-name wasm_brotli --release",    
     "build": "npm run build:browser && npm run build:nodejs",
     "postbuild": "babel-node --extensions='.ts' ./update-package-json.ts",
     "pretest": "npm run build",
