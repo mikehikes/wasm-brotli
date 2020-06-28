@@ -1,4 +1,4 @@
-use brotli::{enc::BrotliEncoderInitParams, BrotliCompress, BrotliDecompress};
+use brotli::{BrotliDecompress};
 use cfg_if::cfg_if;
 use wasm_bindgen::prelude::*;
 
@@ -22,21 +22,7 @@ cfg_if! {
     }
 }
 
-#[wasm_bindgen]
-pub fn compress(buffer: Vec<u8>) -> Result<Vec<u8>, wasm_bindgen::JsValue> {
-    cfg_if! {
-        if #[cfg(feature = "debug_assertions")] {
-            log(&format!("`compress` received {:?}", buffer));
-        }
-    }
 
-    let mut output = vec![];
-    let params = BrotliEncoderInitParams();
-    match BrotliCompress(&mut &*buffer, &mut output, &params) {
-        Ok(_) => Ok(output),
-        Err(e) => Err(wasm_bindgen::JsValue::from_str(&format!("{:?}", e))),
-    }
-}
 
 #[wasm_bindgen]
 pub fn decompress(buffer: Vec<u8>) -> Result<Vec<u8>, wasm_bindgen::JsValue> {
